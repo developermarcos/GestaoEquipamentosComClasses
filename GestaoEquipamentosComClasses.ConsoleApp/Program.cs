@@ -4,31 +4,32 @@ namespace GestaoEquipamentosComClasses.ConsoleApp
 {
     internal class Program
     {
+        public static Funcionario[] funcionarios = new Funcionario[100];
+        public static Equipamento[] Equipamentos = new Equipamento[100];
+        public static Chamado[] chamados = new Chamado[100];
         static void Main(string[] args)
         {
-            int telaSelecionada;
+            Telas telaSelecionada;
             int menuSelecionado;
             do
             {
                 telaSelecionada = Menu.ApresentaMenuPrincipal();
 
-                if(telaSelecionada != ((int)Telas.Sair))
+                if((int)telaSelecionada != ((int)Telas.Sair))
                 {
-                    switch (telaSelecionada)
+                    if (telaSelecionada == Telas.Error)
                     {
-                        case (int)Telas.Chamado:
-                            //menuSelecionado = Menu.ApresentaMenuCrud("Chamados");
-                            break;
-                        case (int)Telas.Equipamentos:
-                            //menuSelecionado = Menu.ApresentaMenuCrud("Equipamentos");
-                            break;
-                        case (int)Telas.Funcionario:
-                            Funcionario.ChamaMetodo();
-                            break;
-                        //default:
-                            //Apresenta tela erro
+                        Error.PaginaError("Pagina não encontrada");
                     }
-
+                    else
+                    {
+                        switch (telaSelecionada)
+                        {
+                            case Telas.Funcionario:
+                                FuncionariosCrud.ApresentaOpcoesCrud(ref funcionarios);
+                                break;
+                        }
+                    }
                 }
                 else
                     break;             

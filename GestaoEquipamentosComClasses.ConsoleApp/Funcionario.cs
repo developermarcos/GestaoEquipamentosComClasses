@@ -6,77 +6,30 @@ using System.Threading.Tasks;
 
 namespace GestaoEquipamentosComClasses.ConsoleApp
 {
-    public enum OpcoesMenuFuncionarios{
+    public enum OpcoesFuncionarios
+    {
         Listar = 1,
         Cadastrar = 2,
         Editar = 3,
-        Excluir = 4
+        Excluir = 4,
+        Error
     }
     internal class Funcionario
     {
         public int funcionarioId;
         public string nome;
         public string email;
-
-        public static void Listar()
+        public string telefone;
+        public Funcionario(int id, string nome, string email, string telefone)
         {
-            Mensagem.Msg("listar funcionario");
+            this.funcionarioId = id;
+            this.nome = nome;
+            this.email = email;
+            this.telefone = telefone;
         }
-        public static void Cadastrar()
+        public void ApresentaFuncionario()
         {
-            Mensagem.Sucesso("Cadastrar funcionario");
-        }
-        public static void Editar()
-        {
-            Mensagem.Aviso("Editar funcionario");
-        }
-        public static void Excluir()
-        {
-            Mensagem.Falha("Excluir funcionario");
-        }
-        public static void ChamaMetodo()
-        {
-            bool voltarMenuPrincipal = false;
-            while (voltarMenuPrincipal == false)
-            {
-                bool menuValido;
-                int opcaoSelecionada;
-                Console.WriteLine();
-                Mensagem.Msg($"- {OpcoesMenuFuncionarios.Listar} ({OpcoesMenuFuncionarios.Listar.GetHashCode()}) ");
-                Mensagem.Msg($"- {OpcoesMenuFuncionarios.Cadastrar} ({OpcoesMenuFuncionarios.Cadastrar.GetHashCode()}) ");
-                Mensagem.Msg($"- {OpcoesMenuFuncionarios.Editar} ({OpcoesMenuFuncionarios.Editar.GetHashCode()}) ");
-                Mensagem.Msg($"- {OpcoesMenuFuncionarios.Excluir} ({OpcoesMenuFuncionarios.Excluir.GetHashCode()}) ");
-                Console.Write("Digite o numero de acordo com a opção selecionada:");
-                string lerTela = Console.ReadLine();
-
-                menuValido = int.TryParse(lerTela, out opcaoSelecionada);
-                Console.Clear();
-                if (menuValido == true)
-                    switch (opcaoSelecionada)
-                    {
-                        case (int)OpcoesMenuFuncionarios.Listar:
-                            Listar();
-                            break;
-                        case (int)OpcoesMenuFuncionarios.Cadastrar:
-                            Cadastrar();
-                            break;
-                        case (int)OpcoesMenuFuncionarios.Editar:
-                            Editar();
-                            break;
-                        case (int)OpcoesMenuFuncionarios.Excluir:
-                            Excluir();
-                            break;
-                        default:
-                            Mensagem.Aviso("Menu não encontrado");
-                            voltarMenuPrincipal = true;
-                            break;
-                    }
-                else
-                {
-                    Mensagem.Aviso("Menu não encontrado");
-                    voltarMenuPrincipal = true;
-                }
-            }
+            Console.WriteLine($"ID: {funcionarioId} | Funcionario: {nome} | Email: {email} | Telefone: {telefone}");
         }
     }
 }
